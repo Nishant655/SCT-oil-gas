@@ -1,0 +1,228 @@
+/* ============================= */
+/* Brand Variables */
+/* ============================= */
+:root {
+    --primary-color: #0D85F4;
+    --primary-dark: #0A6ED1;
+    --primary-light: #EAF4FF;
+    --heading-color: #0D85F4;
+    --text-color: #333333;
+    --background-color: #F9F9F9;
+}
+
+/* ============================= */
+/* Reset and Base Styles */
+/* ============================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    line-height: 1.6;
+    color: #374151;
+    background-color: var(--background-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+
+
+/* Force visibility and animation for the loader dots */
+.loading-dot {
+    width: 14px !important;
+    height: 14px !important;
+    background-color: #0D85F4 !important; /* Brand Blue */
+    border-radius: 50% !important;
+    display: inline-block !important;
+    opacity: 1 !important;
+    animation: dotPulse 1.4s ease-in-out infinite !important;
+}
+
+.loading-dot:nth-child(1) { animation-delay: -0.32s !important; }
+.loading-dot:nth-child(2) { animation-delay: -0.16s !important; }
+
+@keyframes dotPulse {
+    0%, 80%, 100% { 
+        transform: scale(0.6);
+        opacity: 0.4;
+    } 
+    40% { 
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* ============================= */
+/* Hero Section */
+/* ============================= */
+
+.hero-image {
+    position: relative;
+    /* Height remains 350px per video duplicate request, or adjust to 600px for full hero */
+    height: 600px; 
+    overflow: hidden;
+    background-color: var(--heading); /* Fallback to #000b35 while loading */
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* Added subtle zoom effect common in professional industrial UIs */
+    transition: transform 10s ease-out;
+}
+
+.hero-image:hover img {
+    transform: scale(1.05);
+}
+
+.subtitle {
+    font-size: 12px;
+    color: var(--primary-color); /* keep brand blue */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.main-title {
+    font-size: 42px;
+    font-weight: bold;
+    color: #0D85F4;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-description {
+    font-size: 14px;
+    color: #0D85F4;
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+/* ============================= */
+/* Section Header */
+/* ============================= */
+
+.section-header h2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0D85F4;
+    letter-spacing: 0.5px;
+}
+
+/* ============================= */
+/* Text Content */
+/* ============================= */
+
+.text-content p {
+    font-size: 14px;
+    color: #0D85F4;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+/* ============================= */
+/* Two Column Layout */
+/* ============================= */
+
+.column h3 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #0D85F4;
+    margin-bottom: 15px;
+}
+
+.column ul li {
+    font-size: 13px;
+    color: #0D85F4;
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+/* ============================= */
+/* Data Table */
+/* ============================= */
+
+.data-table td {
+    padding: 12px;
+    border: 1px solid #c5d8f5;
+    line-height: 1.6;
+    color: #0D85F4;
+}
+
+/* ============================= */
+/* Lists */
+/* ============================= */
+
+.list-item h3,
+.product-item h3,
+.consideration-item h3,
+.why-item h3 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #0D85F4;
+    margin-bottom: 8px;
+}
+
+.list-item p,
+.product-item p,
+.consideration-item p,
+.why-item p {
+    font-size: 13px;
+    color: #0D85F4;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+/* ============================= */
+/* Responsive */
+/* ============================= */
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+    }
+
+    .main-title {
+        font-size: 32px;
+    }
+
+    .content {
+        padding: 30px 25px;
+    }
+
+    .two-column {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .data-table {
+        font-size: 11px;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 8px;
+    }
+}
+
+@media print {
+    body {
+        background-color: #ffffff;
+    }
+
+    .data-table {
+        page-break-inside: avoid;
+    }
+}
