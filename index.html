@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,100 +9,136 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <link rel="stylesheet" href="style.css">
-
   <style>
     html {
       scroll-behavior: smooth;
+    }
+    .loading-dot {
+      width: 12px;
+      height: 12px;
+      background-color: #0D85F4;
+      border-radius: 50%;
+      animation: bounce 1.4s infinite ease-in-out both;
+    }
+    .loading-dot:nth-child(1) { animation-delay: -0.32s; }
+    .loading-dot:nth-child(2) { animation-delay: -0.16s; }
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1.0); }
+    }
+    /* Mobile Menu Transition */
+    #mobile-menu {
+      transition: transform 0.3s ease-in-out;
+    }
+    .menu-open {
+      transform: translateX(0) !important;
     }
   </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800 font-sans">
 
-<!-- Welcome Loader -->
 <div id="loader" class="fixed inset-0 bg-white flex items-center justify-center z-[9999] transition-opacity duration-700 ease-in-out">
   <div class="text-center">
-    
     <img src="./images/logo.svg" alt="SCT Logo" class="h-16 mx-auto mb-10 block">
-
     <div class="flex justify-center items-center space-x-4">
       <div class="loading-dot"></div>
       <div class="loading-dot"></div>
       <div class="loading-dot"></div>
     </div>
-
   </div>
 </div>
 
-</div>
-<!-- ================= HEADER ================= -->
-<header class="bg-white/95 backdrop-blur-md shadow-md fixed w-full top-0 z-50 transition-all duration-300">
+<div id="menu-backdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[998] opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"></div>
+
+  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-gray-100/90 backdrop-blur-2xl border-l border-white z-[1000] translate-x-full md:hidden flex flex-col p-4 shadow-[-20px_0_50px_rgba(0,0,0,0.2)] transition-transform duration-500 ease-in-out">
+    
+    <div class="h-20"></div> <div class="flex-1 bg-white rounded-[2.5rem] shadow-xl border border-white flex flex-col overflow-hidden">
+      
+      <nav class="flex flex-col p-6 space-y-1">
+        <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-extrabold mb-4 px-2">Navigation</p>
+        
+        <a href="#content" class="mobile-link group flex justify-between items-center p-4 rounded-2xl hover:bg-blue-50 transition-all active:scale-95">
+          <span class="text-lg font-bold text-gray-900">Overview</span>
+          <div class="p-2 bg-blue-50 rounded-lg text-[#0D85F4]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <a href="#contact" class="mobile-link group flex justify-between items-center p-4 rounded-2xl hover:bg-blue-50 transition-all active:scale-95">
+          <span class="text-lg font-bold text-gray-900">Contact</span>
+          <div class="p-2 bg-blue-50 rounded-lg text-[#0D85F4]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+
+        <div class="pt-6">
+          <a href="#contact" class="mobile-link bg-[#0D85F4] text-white text-center py-4 rounded-2xl font-bold text-lg shadow-lg block active:scale-95 transition-all">
+            Get in Touch
+          </a>
+        </div>
+      </nav>
+
+      <div class="mt-auto bg-gray-50/80 p-8 border-t border-gray-100">
+        <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-extrabold mb-4">Direct Support</p>
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-[#0D85F4]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <p class="font-bold text-sm text-gray-700">info@sctwater.com</p>
+          </div>
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-[#0D85F4]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <p class="font-bold text-sm text-gray-700">+91 22 4061 9000</p>
+          </div>
+        </div>
+      </div>
+
+    </div> 
+    <div class="h-6"></div>
+  </div>
+
+<header class="bg-white/95 backdrop-blur-md shadow-md fixed w-full top-0 left-0 z-[999] transition-all duration-300">
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
     
-    <!-- Logo -->
     <div class="flex items-center space-x-3">
-      <img src="./images/logo.svg" alt="Company Logo" class="h-8 w-auto">
+      <img src="./images/logo.svg" alt="SCT Logo" class="h-8 w-auto">
     </div>
 
-    <!-- Desktop Navigation -->
     <nav class="hidden md:flex items-center space-x-10 font-medium text-gray-700">
-      
-      <a href="#content" 
-         class="relative hover:text-[#374151] transition duration-300 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-[#0D85F4] after:transition-all after:duration-300 hover:after:w-full">
-        Overview
-      </a>
-
-      <a href="#contact" 
-         class="relative hover:text-[#374151] transition duration-300 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-[#0D85F4] after:transition-all after:duration-300 hover:after:w-full">
-        Contact
-      </a>
-
-      <!-- CTA Button -->
-      <a href="#contact"
-         class="bg-[#0D85F4] text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300 shadow-sm">
-        Get in Touch
-      </a>
+      <a href="#content" class="hover:text-[#0D85F4] transition">Overview</a>
+      <a href="#contact" class="hover:text-[#0D85F4] transition">Contact</a>
+      <a href="#contact" class="bg-[#0D85F4] text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition shadow-sm">Get in Touch</a>
     </nav>
 
-    <!-- Mobile Menu Button -->
-    <button class="md:hidden text-gray-700 hover:text-[#374151] focus:outline-none">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-              d="M4 6h16M4 12h16M4 18h16"/>
+    <button id="mobile-menu-btn" class="md:hidden text-gray-700 hover:text-[#0D85F4] focus:outline-none z-[1001] relative p-2">
+      <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
       </svg>
     </button>
-
   </div>
+
+  
 </header>
 <div class="h-20"></div>
 
-<!-- ================= HERO BANNER ================= -->
 <section class="relative h-[620px] flex items-center justify-center text-center">
-
-  <!-- Background Image -->
   <div class="absolute inset-0">
-    <img src="./images/new.png"
-         class="w-full h-full object-cover brightness-90">
-    
+    <img src="./images/new.png" alt="Oil and Gas Facility" class="w-full h-full object-cover brightness-90">
     <div class="absolute inset-0 bg-[#000b35]/40 transition-opacity duration-500"></div>
   </div>
-
-  <!-- Dark Overlay (for better text visibility) -->
   <div class="absolute inset-0 bg-black/20"></div>
-
-  <!-- Content -->
   <div class="relative z-10 px-6">
     <h1 class="text-4xl md:text-5xl font-bold text-white">
       Oil and Gas Wastewater Treatment
     </h1>
   </div>
-
 </section>
 
-<!-- ================= MAIN CONTENT ================= -->
 <section id="content" class="py-32 bg-gray-50 text-[#374151]">
-  <div class="max-w-6xl mx-auto px-6 py-12 space-y-24 font-sans text-gray-700">
+  <div class="max-w-6xl mx-auto px-6 py-12 space-y-24">
 
   <section class="relative">
     <div class="absolute -top-6 -left-6 w-24 h-24 bg-blue-50 rounded-full -z-10"></div>
@@ -127,14 +165,14 @@
       </div>
     </div>
 
-      <div class="text-center pt-16 pb-8">
-        <h2 class="text-3xl font-bold text-gray-900">
-          Characteristics of Wastewater in the Oil and Gas Industry
-        </h2>
-        <p class="text-gray-500 mt-2">Key contaminants and their operational impact</p>
-      </div>
+    <div class="text-center pt-16 pb-8">
+      <h2 class="text-3xl font-bold text-gray-900">
+        Characteristics of Wastewater in the Oil and Gas Industry
+      </h2>
+      <p class="text-gray-500 mt-2">Key contaminants and their operational impact</p>
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      
       <div class="group bg-white border border-gray-200 rounded-2xl p-6 hover:border-[#0D85F4] hover:shadow-xl transition-all duration-300">
         <div class="flex items-center space-x-4 mb-4">
           <div class="p-3 bg-blue-50 text-[#0D85F4] rounded-lg group-hover:bg-[#0D85F4] group-hover:text-white transition-colors">
@@ -248,333 +286,302 @@
           </div>
         </div>
       </div>
-</div>
-</section> 
+    </div>
+  </section> 
 
-    <section id="oil-gas-treatment-details" class="py-24 bg-gray-50 font-sans text-gray-700">
-  <div class="max-w-6xl mx-auto px-6 space-y-32">
-
-   <div class="space-y-16">
-  <div class="text-center max-w-3xl mx-auto space-y-4">
-    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-      Key Challenges in Treating <span class="text-[#0D85F4]">Oil & Gas Wastewater</span>
-    </h2>
-    <p class="text-lg text-gray-600">
-      Oil and gas wastewater is difficult to treat primarily because of its composition and the operational environment. Companies often face challenges such as:
-    </p>
-  </div>
-
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-      <div class="w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-xl flex items-center justify-center mb-6 font-bold text-xl">01</div>
-      <h3 class="text-xl font-bold text-gray-900 mb-3">High Hydrocarbon Content</h3>
-      <p class="text-gray-600 text-sm leading-relaxed">
-        Removing free, dispersed, and emulsified oil requires multi-stage separation. Emulsified oil, in particular, demands advanced technologies such as Dissolved Air Flotation (DAF), membrane systems, or coalescers.
+  <section class="py-16">
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+        Key Challenges in Treating <span class="text-[#0D85F4]">Oil & Gas Wastewater</span>
+      </h2>
+      <p class="text-lg text-gray-600">
+        Oil and gas wastewater is difficult to treat primarily because of its composition and the operational environment. Companies often face challenges such as:
       </p>
     </div>
 
-    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-      <div class="w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-xl flex items-center justify-center mb-6 font-bold text-xl">02</div>
-      <h3 class="text-xl font-bold text-gray-900 mb-3">High TDS and Salinity</h3>
-      <p class="text-gray-600 text-sm leading-relaxed">
-        Produced water can contain TDS levels exceeding 100,000 mg/L. Conventional biological treatment cannot handle extreme salinity, making thermal or membrane solutions necessary.
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-xl flex items-center justify-center mb-6 font-bold text-xl">01</div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3">High Hydrocarbon Content</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Removing free, dispersed, and emulsified oil requires multi-stage separation. Emulsified oil, in particular, demands advanced technologies such as Dissolved Air Flotation (DAF), membrane systems, or coalescers.
+        </p>
+      </div>
+      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-xl flex items-center justify-center mb-6 font-bold text-xl">02</div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3">High TDS and Salinity</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Produced water can contain TDS levels exceeding 100,000 mg/L. Conventional biological treatment cannot handle extreme salinity, making thermal or membrane solutions necessary.
+        </p>
+      </div>
+      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-xl flex items-center justify-center mb-6 font-bold text-xl">03</div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Variable Flow and Load</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Flow rates and pollutant loads can change daily. Treatment systems must stay stable and efficient even under fluctuating conditions.
+        </p>
+      </div>
+      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-xl flex items-center justify-center mb-6 font-bold text-xl">04</div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Presence of Toxic Compounds</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          BTEX, phenols, and heavy metals can inhibit biological systems and require oxidation or specialized filtration.
+        </p>
+      </div>
+      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-xl flex items-center justify-center mb-6 font-bold text-xl">05</div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Strict Environmental Regulations</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Refineries and E&P operators must comply with stringent discharge standards. Failure to meet norms leads to penalties, downtime, and reputational risks.
+        </p>
+      </div>
+      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-xl flex items-center justify-center mb-6 font-bold text-xl">06</div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3">High OPEX in Traditional Systems</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Older plants often consume high energy, rely heavily on chemicals, and require frequent maintenance.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="text-center max-w-4xl mx-auto space-y-4 mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+        Products for <span class="text-[#0D85F4]">Upstream Wastewater Treatment</span>
+      </h2>
+      <p class="text-lg text-gray-600 leading-relaxed">
+        Advanced treatment technologies are essential to ensure safe discharge, reuse, and regulatory compliance across upstream as well as midstream and downstream facilities.
       </p>
     </div>
 
-    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-      <div class="w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-xl flex items-center justify-center mb-6 font-bold text-xl">03</div>
-      <h3 class="text-xl font-bold text-gray-900 mb-3">Variable Flow and Load</h3>
-      <p class="text-gray-600 text-sm leading-relaxed">
-        Flow rates and pollutant loads can change daily. Treatment systems must stay stable and efficient even under fluctuating conditions.
-      </p>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+        <div class="h-48 bg-slate-200 flex items-center justify-center">
+          <span class="text-slate-400 font-bold uppercase tracking-widest">Solid-Liquid Hydrocyclone</span>
+        </div>
+        <div class="p-8 flex-1 space-y-4">
+          <h3 class="text-xl font-bold text-gray-900">1. Solid-Liquid Hydrocyclone</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">The Solid-Liquid Hydrocyclone clarifies solids down to 5 microns using centrifugal force. Its modular, no-backwash design minimizes the footprint and ensures smooth operations in harsh oil & gas conditions. Continuous discharge keeps processes running effectively and efficiently.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+        <div class="h-48 bg-slate-200 flex items-center justify-center">
+          <span class="text-slate-400 font-bold uppercase tracking-widest">Liquid-Liquid Hydrocyclone</span>
+        </div>
+        <div class="p-8 flex-1 space-y-4">
+          <h3 class="text-xl font-bold text-gray-900">2. Liquid-Liquid Hydrocyclone</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">The Liquid-Liquid Hydrocyclone spins wastewater at up to 4,000 Gs to separate oil from water without chemicals or moving parts. With twin inlets for stabilized flow, it achieves high efficiency and turndown ratios, offering a compact design that maximizes uptime in oil & gas separation.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+        <div class="h-48 bg-slate-200 flex items-center justify-center">
+          <span class="text-slate-400 font-bold uppercase tracking-widest">API Separator</span>
+        </div>
+        <div class="p-8 flex-1 space-y-4">
+          <h3 class="text-xl font-bold text-gray-900">3. API Separator</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">The API Separator relies on gravity to skim free oil from wastewater, with vapor covers for odor control and safety. It features double containment and corrosion-resistant parts for leak detection and durability. This system is ideal for primary treatment in oil & gas operations and includes nitrogen blanketing for added safety.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+        <div class="h-48 bg-slate-200 flex items-center justify-center">
+          <span class="text-slate-400 font-bold uppercase tracking-widest">Brise™ DGF/IGF</span>
+        </div>
+        <div class="p-8 flex-1 space-y-4">
+          <h3 class="text-xl font-bold text-gray-900">4. Brise™ DGF / IGF Separators</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Brise™ DGF/IGF Separators efficiently separate oil and suspended solids using micro-bubbles to float contaminants to the surface for easy removal. Its high removal efficiency and compact design make it an ideal solution for treating emulsified oils in oil & gas wastewater.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+        <div class="h-48 bg-slate-200 flex items-center justify-center">
+          <span class="text-slate-400 font-bold uppercase tracking-widest">Combosep™ System</span>
+        </div>
+        <div class="p-8 flex-1 space-y-4">
+          <h3 class="text-xl font-bold text-gray-900">5. Combosep™ System</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">The Combosep™ System integrates multiple vertical and horizontal separation technologies in one compact unit to remove oils, solids, and other contaminants. It combines gravity separation with flotation, achieving optimal treatment of wastewater with varying flow rates and high efficiency in space-constrained environments.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+        <div class="h-48 bg-slate-200 flex items-center justify-center">
+          <span class="text-slate-400 font-bold uppercase tracking-widest">Quadricell IAF/IGF</span>
+        </div>
+        <div class="p-8 flex-1 space-y-4">
+          <h3 class="text-xl font-bold text-gray-900">6. Quadricell IAF / IGF Separators</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">The Quadricell system combines induced air and gas flotation technologies for highly efficient removal of oils and suspended solids. With superior performance in high-throughput conditions, this system is ideal for treating produced water in oil & gas facilities, offering reliable operation and easy maintenance.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+        <div class="h-48 bg-slate-200 flex items-center justify-center">
+          <span class="text-slate-400 font-bold uppercase tracking-widest">Veirsep™ System</span>
+        </div>
+        <div class="p-8 flex-1 space-y-4">
+          <h3 class="text-xl font-bold text-gray-900">7. Veirsep™ Horizontal Flotation System</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">The Veirsep™ Horizontal Flotation System uses a horizontal flotation vessel to remove oils and solids from wastewater. Its compact design reduces the footprint while maintaining high separation efficiency. This system is particularly effective for high-flow oil & gas wastewater applications.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+        <div class="h-48 bg-slate-200 flex items-center justify-center">
+          <span class="text-slate-400 font-bold uppercase tracking-widest">SPINSEP™ System</span>
+        </div>
+        <div class="p-8 flex-1 space-y-4">
+          <h3 class="text-xl font-bold text-gray-900">8. SPINSEP™ Vertical Flotation System</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">The SPINSEP™ system uses innovative methods within a compact vertical vessel to skim oil from produced water. The ASME-optional build reduces footprint for discharge or injection preparation. It’s an effective and innovative solution for oil & gas wastewater polishing.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+        <div class="h-48 bg-slate-200 flex items-center justify-center">
+          <span class="text-slate-400 font-bold uppercase tracking-widest">Auto-Shell™ Filters</span>
+        </div>
+        <div class="p-8 flex-1 space-y-4">
+          <h3 class="text-xl font-bold text-gray-900">9. Auto-Shell™ Filters</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">This patented design uses shared scrubbing pumps for multi-cell efficiency in oil removal. It eliminates the need for retention screens, simplifying setup and reducing costs. The advanced technology ensures enhanced performance for oil & gas filtration systems.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+        <div class="h-48 bg-slate-200 flex items-center justify-center">
+          <span class="text-slate-400 font-bold uppercase tracking-widest">Monosep™ Filtration</span>
+        </div>
+        <div class="p-8 flex-1 space-y-4">
+          <h3 class="text-xl font-bold text-gray-900">10. Monosep™ High-flow Walnut Shell Filtration</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Monosep™ offers high-flow filtration with no moving parts, backwashing with minimal water use compared to standard designs. Its lightweight, compact footprint reduces installation costs for multi-filter oil & gas systems, providing effective removal of oily contaminants.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white p-12 md:p-16 rounded-[3rem] shadow-xl border border-gray-100 space-y-12">
+    <div class="text-center max-w-3xl mx-auto space-y-4">
+      <h2 class="text-3xl font-bold text-gray-900">
+        Considerations While Choosing the Best <span class="text-[#0D85F4]">Oil & Gas Wastewater Treatment Solution</span>
+      </h2>
+      <p class="text-gray-600">Evaluating your refinery needs can significantly reduce your operational burden and long-term costs.</p>
     </div>
 
-    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-      <div class="w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-xl flex items-center justify-center mb-6 font-bold text-xl">04</div>
-      <h3 class="text-xl font-bold text-gray-900 mb-3">Presence of Toxic Compounds</h3>
-      <p class="text-gray-600 text-sm leading-relaxed">
-        BTEX, phenols, and heavy metals can inhibit biological systems and require oxidation or specialized filtration.
-      </p>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">1</div>
+        <div>
+          <h4 class="font-bold text-gray-900 mb-2">Understanding Type and Quality of Wastewater</h4>
+          <p class="text-sm text-gray-600">Produced water demands high-efficiency oil removal and advanced salinity management. Refinery wastewater often requires multi-stage treatment, including biological and polishing steps.</p>
+        </div>
+      </div>
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">2</div>
+        <div>
+          <h4 class="font-bold text-gray-900 mb-2">Required Treatment Standards</h4>
+          <p class="text-sm text-gray-600">Depending on the discharge requirement, such as surface disposal, reuse, reinjection, or achieving ZLD, the treatment approach must change.</p>
+        </div>
+      </div>
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">3</div>
+        <div>
+          <h4 class="font-bold text-gray-900 mb-2">Variability of Flow and Load</h4>
+          <p class="text-sm text-gray-600">A system must stay stable even when influent quality fluctuates. Modular and automated solutions work best in such environments.</p>
+        </div>
+      </div>
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">4</div>
+        <div>
+          <h4 class="font-bold text-gray-900 mb-2">Technology Selection</h4>
+          <p class="text-sm text-gray-600">A good solution combines mechanical, chemical, biological, and membrane-based processes. Common tech: DAF, SBR/MBR, AOP, filtration, and ZLD evaporators.</p>
+        </div>
+      </div>
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">5</div>
+        <div>
+          <h4 class="font-bold text-gray-900 mb-2">Energy and Chemical Consumption</h4>
+          <p class="text-sm text-gray-600">Operational costs can quickly escalate if the system is not optimized. Low-energy and low-chemical designs reduce overall OPEX.</p>
+        </div>
+      </div>
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">6</div>
+        <div>
+          <h4 class="font-bold text-gray-900 mb-2">Automation and Monitoring</h4>
+          <p class="text-sm text-gray-600">SCADA and IoT-based monitoring ensure consistent discharge quality and early detection of abnormalities.</p>
+        </div>
+      </div>
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">7</div>
+        <div>
+          <h4 class="font-bold text-gray-900 mb-2">Installation Footprint</h4>
+          <p class="text-sm text-gray-600">Oil & gas facilities often have space limitations. Compact, skid-mounted systems offer faster installation and minimal disruption.</p>
+        </div>
+      </div>
+      <div class="flex gap-6">
+        <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">8</div>
+        <div>
+          <h4 class="font-bold text-gray-900 mb-2">Long-Term Maintainability</h4>
+          <p class="text-sm text-gray-600">Easy access for maintenance, availability of spares, and trained service support make a big difference in plant reliability.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-      <div class="w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-xl flex items-center justify-center mb-6 font-bold text-xl">05</div>
-      <h3 class="text-xl font-bold text-gray-900 mb-3">Strict Environmental Regulations</h3>
-      <p class="text-gray-600 text-sm leading-relaxed">
-        Refineries and E&P operators must comply with stringent discharge standards. Failure to meet norms leads to penalties, downtime, and reputational risks.
-      </p>
-    </div>
-
-    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-      <div class="w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-xl flex items-center justify-center mb-6 font-bold text-xl">06</div>
-      <h3 class="text-xl font-bold text-gray-900 mb-3">High OPEX in Traditional Systems</h3>
-      <p class="text-gray-600 text-sm leading-relaxed">
-        Older plants often consume high energy, rely heavily on chemicals, and require frequent maintenance.
-      </p>
-    </div>
-  </div>
-  <p class="text-center text-lg italic text-gray-500 mt-8">
-    Considering these challenges, choosing the right oil & gas wastewater treatment solution is critical for long-term reliability.
-  </p>
-</div>
-    <div class="space-y-16">
-      <div class="text-center max-w-4xl mx-auto space-y-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-          Products for <span class="text-[#0D85F4]">Upstream Wastewater Treatment</span>
+  <section class="bg-white rounded-[3rem] p-12 md:p-20 text-gray-700 relative overflow-hidden border border-gray-100 shadow-sm">
+    <div class="absolute top-0 right-0 w-64 h-64 bg-[#0D85F4]/5 blur-3xl rounded-full -mr-32 -mt-32"></div>
+    <div class="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-6 tracking-tight">
+          Why Oil & Gas Companies Choose <span class="text-[#0D85F4]">SCT</span>
         </h2>
-        <p class="text-lg text-gray-600 leading-relaxed">
-          Advanced treatment technologies are essential to ensure safe discharge, reuse, and regulatory compliance across upstream as well as midstream and downstream facilities.
+        <p class="text-gray-600 text-lg leading-relaxed border-l-4 border-[#0D85F4] pl-6 py-2">
+          SCT stands out as a trusted partner for oil and gas wastewater treatment by blending customized engineering with cutting-edge technology.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-        
-        <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <div class="h-48 bg-slate-200 flex items-center justify-center">
-            <span class="text-slate-400 font-bold uppercase tracking-widest">Solid-Liquid Hydrocyclone</span>
+      <div class="space-y-10">
+        <div class="flex items-start gap-5 group">
+          <div class="flex-shrink-0 w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-2xl flex items-center justify-center group-hover:bg-[#0D85F4] group-hover:text-white transition-all duration-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
           </div>
-          <div class="p-8 flex-1 space-y-4">
-            <h3 class="text-xl font-bold text-gray-900">1. Solid-Liquid Hydrocyclone</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">The Solid-Liquid Hydrocyclone clarifies solids down to 5 microns using centrifugal force. Its modular, no-backwash design minimizes the footprint and ensures smooth operations in harsh oil & gas conditions. Continuous discharge keeps processes running effectively and efficiently.</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <div class="h-48 bg-slate-200 flex items-center justify-center">
-            <span class="text-slate-400 font-bold uppercase tracking-widest">Liquid-Liquid Hydrocyclone</span>
-          </div>
-          <div class="p-8 flex-1 space-y-4">
-            <h3 class="text-xl font-bold text-gray-900">2. Liquid-Liquid Hydrocyclone</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">The Liquid-Liquid Hydrocyclone spins wastewater at up to 4,000 Gs to separate oil from water without chemicals or moving parts. With twin inlets for stabilized flow, it achieves high efficiency and turndown ratios, offering a compact design that maximizes uptime in oil & gas separation.</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <div class="h-48 bg-slate-200 flex items-center justify-center">
-            <span class="text-slate-400 font-bold uppercase tracking-widest">API Separator</span>
-          </div>
-          <div class="p-8 flex-1 space-y-4">
-            <h3 class="text-xl font-bold text-gray-900">3. API Separator</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">The API Separator relies on gravity to skim free oil from wastewater, with vapor covers for odor control and safety. It features double containment and corrosion-resistant parts for leak detection and durability. This system is ideal for primary treatment in oil & gas operations and includes nitrogen blanketing for added safety.</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <div class="h-48 bg-slate-200 flex items-center justify-center">
-            <span class="text-slate-400 font-bold uppercase tracking-widest">Brise™ DGF/IGF</span>
-          </div>
-          <div class="p-8 flex-1 space-y-4">
-            <h3 class="text-xl font-bold text-gray-900">4. Brise™ DGF / IGF Separators</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">Brise™ DGF/IGF Separators efficiently separate oil and suspended solids using micro-bubbles to float contaminants to the surface for easy removal. Its high removal efficiency and compact design make it an ideal solution for treating emulsified oils in oil & gas wastewater.</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <div class="h-48 bg-slate-200 flex items-center justify-center">
-            <span class="text-slate-400 font-bold uppercase tracking-widest">Combosep™ System</span>
-          </div>
-          <div class="p-8 flex-1 space-y-4">
-            <h3 class="text-xl font-bold text-gray-900">5. Combosep™ System</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">The Combosep™ System integrates multiple vertical and horizontal separation technologies in one compact unit to remove oils, solids, and other contaminants. It combines gravity separation with flotation, achieving optimal treatment of wastewater with varying flow rates and high efficiency in space-constrained environments.</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <div class="h-48 bg-slate-200 flex items-center justify-center">
-            <span class="text-slate-400 font-bold uppercase tracking-widest">Quadricell IAF/IGF</span>
-          </div>
-          <div class="p-8 flex-1 space-y-4">
-            <h3 class="text-xl font-bold text-gray-900">6. Quadricell IAF / IGF Separators</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">The Quadricell system combines induced air and gas flotation technologies for highly efficient removal of oils and suspended solids. With superior performance in high-throughput conditions, this system is ideal for treating produced water in oil & gas facilities, offering reliable operation and easy maintenance.</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <div class="h-48 bg-slate-200 flex items-center justify-center">
-            <span class="text-slate-400 font-bold uppercase tracking-widest">Veirsep™ System</span>
-          </div>
-          <div class="p-8 flex-1 space-y-4">
-            <h3 class="text-xl font-bold text-gray-900">7. Veirsep™ Horizontal Flotation System</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">The Veirsep™ Horizontal Flotation System uses a horizontal flotation vessel to remove oils and solids from wastewater. Its compact design reduces the footprint while maintaining high separation efficiency. This system is particularly effective for high-flow oil & gas wastewater applications.</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <div class="h-48 bg-slate-200 flex items-center justify-center">
-            <span class="text-slate-400 font-bold uppercase tracking-widest">SPINSEP™ System</span>
-          </div>
-          <div class="p-8 flex-1 space-y-4">
-            <h3 class="text-xl font-bold text-gray-900">8. SPINSEP™ Vertical Flotation System</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">The SPINSEP™ system uses innovative methods within a compact vertical vessel to skim oil from produced water. The ASME-optional build reduces footprint for discharge or injection preparation. It’s an effective and innovative solution for oil & gas wastewater polishing.</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <div class="h-48 bg-slate-200 flex items-center justify-center">
-            <span class="text-slate-400 font-bold uppercase tracking-widest">Auto-Shell™ Filters</span>
-          </div>
-          <div class="p-8 flex-1 space-y-4">
-            <h3 class="text-xl font-bold text-gray-900">9. Auto-Shell™ Filters</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">This patented design uses shared scrubbing pumps for multi-cell efficiency in oil removal. It eliminates the need for retention screens, simplifying setup and reducing costs. The advanced technology ensures enhanced performance for oil & gas filtration systems.</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <div class="h-48 bg-slate-200 flex items-center justify-center">
-            <span class="text-slate-400 font-bold uppercase tracking-widest">Monosep™ Filtration</span>
-          </div>
-          <div class="p-8 flex-1 space-y-4">
-            <h3 class="text-xl font-bold text-gray-900">10. Monosep™ High-flow Walnut Shell Filtration</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">Monosep™ offers high-flow filtration with no moving parts, backwashing with minimal water use compared to standard designs. Its lightweight, compact footprint reduces installation costs for multi-filter oil & gas systems, providing effective removal of oily contaminants.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="bg-white p-12 md:p-16 rounded-[3rem] shadow-xl border border-gray-100 space-y-12">
-      <div class="text-center max-w-3xl mx-auto space-y-4">
-        <h2 class="text-3xl font-bold text-gray-900">
-          Considerations While Choosing the Best <span class="text-[#0D85F4]">Oil & Gas Wastewater Treatment Solution</span>
-        </h2>
-        <p class="text-gray-600">Evaluating your refinery needs can significantly reduce your operational burden and long-term costs.</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="flex gap-6">
-          <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">1</div>
           <div>
-            <h4 class="font-bold text-gray-900 mb-2">Understanding Type and Quality of Wastewater</h4>
-            <p class="text-sm text-gray-600">Produced water demands high-efficiency oil removal and advanced salinity management. Refinery wastewater often requires multi-stage treatment, including biological and polishing steps.</p>
+            <h5 class="font-bold text-gray-900 text-xl mb-1">Innovative Technologies</h5>
+            <p class="text-gray-500 text-sm leading-relaxed">Cutting-edge solutions for hydrocarbon removal, separation, biological treatment, and advanced filtration.</p>
           </div>
         </div>
-        <div class="flex gap-6">
-          <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">2</div>
+        <div class="flex items-start gap-5 group">
+          <div class="flex-shrink-0 w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-2xl flex items-center justify-center group-hover:bg-[#0D85F4] group-hover:text-white transition-all duration-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          </div>
           <div>
-            <h4 class="font-bold text-gray-900 mb-2">Required Treatment Standards</h4>
-            <p class="text-sm text-gray-600">Depending on the discharge requirement, such as surface disposal, reuse, reinjection, or achieving ZLD, the treatment approach must change.</p>
+            <h5 class="font-bold text-gray-900 text-xl mb-1">Customizable Treatment</h5>
+            <p class="text-gray-500 text-sm leading-relaxed">Tailored systems designed to handle specific wastewater characteristics and volumes.</p>
           </div>
         </div>
-        <div class="flex gap-6">
-          <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">3</div>
+        <div class="flex items-start gap-5 group">
+          <div class="flex-shrink-0 w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-2xl flex items-center justify-center group-hover:bg-[#0D85F4] group-hover:text-white transition-all duration-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
           <div>
-            <h4 class="font-bold text-gray-900 mb-2">Variability of Flow and Load</h4>
-            <p class="text-sm text-gray-600">A system must stay stable even when influent quality fluctuates. Modular and automated solutions work best in such environments.</p>
+            <h5 class="font-bold text-gray-900 text-xl mb-1">Expertise and Experience</h5>
+            <p class="text-gray-500 text-sm leading-relaxed">Proven track record serving refineries, production sites, and industrial clients.</p>
           </div>
         </div>
-        <div class="flex gap-6">
-          <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">4</div>
+        <div class="flex items-start gap-5 group">
+          <div class="flex-shrink-0 w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-2xl flex items-center justify-center group-hover:bg-[#0D85F4] group-hover:text-white transition-all duration-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+          </div>
           <div>
-            <h4 class="font-bold text-gray-900 mb-2">Technology Selection</h4>
-            <p class="text-sm text-gray-600">A good solution combines mechanical, chemical, biological, and membrane-based processes. Common tech: DAF, SBR/MBR, AOP, filtration, and ZLD evaporators.</p>
+            <h5 class="font-bold text-gray-900 text-xl mb-1">Commitment to Sustainability</h5>
+            <p class="text-gray-500 text-sm leading-relaxed">Integration of zero liquid discharge (ZLD) options and water reuse strategies.</p>
           </div>
         </div>
-        <div class="flex gap-6">
-          <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">5</div>
-          <div>
-            <h4 class="font-bold text-gray-900 mb-2">Energy and Chemical Consumption</h4>
-            <p class="text-sm text-gray-600">Operational costs can quickly escalate if the system is not optimized. Low-energy and low-chemical designs reduce overall OPEX.</p>
+        <div class="flex items-start gap-5 group">
+          <div class="flex-shrink-0 w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-2xl flex items-center justify-center group-hover:bg-[#0D85F4] group-hover:text-white transition-all duration-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
           </div>
-        </div>
-        <div class="flex gap-6">
-          <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">6</div>
           <div>
-            <h4 class="font-bold text-gray-900 mb-2">Automation and Monitoring</h4>
-            <p class="text-sm text-gray-600">SCADA and IoT-based monitoring ensure consistent discharge quality and early detection of abnormalities.</p>
-          </div>
-        </div>
-        <div class="flex gap-6">
-          <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">7</div>
-          <div>
-            <h4 class="font-bold text-gray-900 mb-2">Installation Footprint</h4>
-            <p class="text-sm text-gray-600">Oil & gas facilities often have space limitations. Compact, skid-mounted systems offer faster installation and minimal disruption.</p>
-          </div>
-        </div>
-        <div class="flex gap-6">
-          <div class="flex-shrink-0 w-10 h-10 bg-[#0D85F4]/10 text-[#0D85F4] rounded-full flex items-center justify-center font-bold">8</div>
-          <div>
-            <h4 class="font-bold text-gray-900 mb-2">Long-Term Maintainability</h4>
-            <p class="text-sm text-gray-600">Easy access for maintenance, availability of spares, and trained service support make a big difference in plant reliability.</p>
+            <h5 class="font-bold text-gray-900 text-xl mb-1">End-to-End Support</h5>
+            <p class="text-gray-500 text-sm leading-relaxed">Comprehensive project management from design to operation, ensuring smooth implementation.</p>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="bg-white rounded-[3rem] p-12 md:p-20 text-gray-700 relative overflow-hidden border border-gray-100 shadow-sm">
-  <div class="absolute top-0 right-0 w-64 h-64 bg-[#0D85F4]/5 blur-3xl rounded-full -mr-32 -mt-32"></div>
-  
-  <div class="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
-    <div>
-      <h2 class="text-4xl font-extrabold text-gray-900 mb-6 tracking-tight">
-        Why Oil & Gas Companies Choose <span class="text-[#0D85F4]">SCT</span>
-      </h2>
-      <p class="text-gray-600 text-lg leading-relaxed border-l-4 border-[#0D85F4] pl-6 py-2">
-        SCT stands out as a trusted partner for oil and gas wastewater treatment by blending customized engineering with cutting-edge technology.
-      </p>
-    </div>
-
-    <div class="space-y-10">
-      <div class="flex items-start gap-5 group">
-        <div class="flex-shrink-0 w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-2xl flex items-center justify-center group-hover:bg-[#0D85F4] group-hover:text-white transition-all duration-300">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-        </div>
-        <div>
-          <h5 class="font-bold text-gray-900 text-xl mb-1">Innovative Technologies</h5>
-          <p class="text-gray-500 text-sm leading-relaxed">Cutting-edge solutions for hydrocarbon removal, separation, biological treatment, and advanced filtration.</p>
-        </div>
-      </div>
-
-      <div class="flex items-start gap-5 group">
-        <div class="flex-shrink-0 w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-2xl flex items-center justify-center group-hover:bg-[#0D85F4] group-hover:text-white transition-all duration-300">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-        </div>
-        <div>
-          <h5 class="font-bold text-gray-900 text-xl mb-1">Customizable Treatment</h5>
-          <p class="text-gray-500 text-sm leading-relaxed">Tailored systems designed to handle specific wastewater characteristics and volumes.</p>
-        </div>
-      </div>
-
-      <div class="flex items-start gap-5 group">
-        <div class="flex-shrink-0 w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-2xl flex items-center justify-center group-hover:bg-[#0D85F4] group-hover:text-white transition-all duration-300">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        </div>
-        <div>
-          <h5 class="font-bold text-gray-900 text-xl mb-1">Expertise and Experience</h5>
-          <p class="text-gray-500 text-sm leading-relaxed">Proven track record serving refineries, production sites, and industrial clients.</p>
-        </div>
-      </div>
-
-      <div class="flex items-start gap-5 group">
-        <div class="flex-shrink-0 w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-2xl flex items-center justify-center group-hover:bg-[#0D85F4] group-hover:text-white transition-all duration-300">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-        </div>
-        <div>
-          <h5 class="font-bold text-gray-900 text-xl mb-1">Commitment to Sustainability</h5>
-          <p class="text-gray-500 text-sm leading-relaxed">Integration of zero liquid discharge (ZLD) options and water reuse strategies.</p>
-        </div>
-      </div>
-
-      <div class="flex items-start gap-5 group">
-        <div class="flex-shrink-0 w-12 h-12 bg-blue-50 text-[#0D85F4] rounded-2xl flex items-center justify-center group-hover:bg-[#0D85F4] group-hover:text-white transition-all duration-300">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-        </div>
-        <div>
-          <h5 class="font-bold text-gray-900 text-xl mb-1">End-to-End Support</h5>
-          <p class="text-gray-500 text-sm leading-relaxed">Comprehensive project management from design to operation, ensuring smooth implementation.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
+  </section>
   </div>
 </section>
 
-<!-- ================= DIVIDER ================= -->
-<div class="border-t border-gray-300"></div>
-
-
-<section class="py-24 bg-white font-sans">
+<section class="py-24 bg-white border-t border-gray-300">
   <div class="max-w-7xl mx-auto px-6">
     <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
       <div class="max-w-xl">
@@ -587,89 +594,72 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-
       <a href="#" class="group border border-gray-100 rounded-2xl p-8 bg-slate-50 hover:bg-white hover:shadow-2xl hover:border-[#0D85F4] transition-all duration-300 flex flex-col justify-between">
         <div>
           <div class="mb-6 inline-block p-3 bg-white rounded-xl shadow-sm group-hover:bg-[#0D85F4] transition-colors">
             <svg class="w-6 h-6 text-[#0D85F4] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
           </div>
           <h3 class="font-bold text-gray-900 text-lg mb-3 leading-tight">Produced Water Treatment</h3>
-          <p class="text-gray-500 text-sm mb-6 leading-relaxed">
-            Advanced separation and polishing systems for upstream operations.
-          </p>
+          <p class="text-gray-500 text-sm mb-6 leading-relaxed">Advanced separation and polishing systems for upstream operations.</p>
         </div>
         <span class="text-[#0D85F4] text-xs font-bold uppercase tracking-widest flex items-center group-hover:translate-x-2 transition-transform">
           Download PDF <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </span>
       </a>
-
       <a href="#" class="group border border-gray-100 rounded-2xl p-8 bg-slate-50 hover:bg-white hover:shadow-2xl hover:border-[#0D85F4] transition-all duration-300 flex flex-col justify-between">
         <div>
           <div class="mb-6 inline-block p-3 bg-white rounded-xl shadow-sm group-hover:bg-[#0D85F4] transition-colors">
             <svg class="w-6 h-6 text-[#0D85F4] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
           </div>
           <h3 class="font-bold text-gray-900 text-lg mb-3 leading-tight">Refinery Wastewater</h3>
-          <p class="text-gray-500 text-sm mb-6 leading-relaxed">
-            Comprehensive treatment solutions for downstream facilities.
-          </p>
+          <p class="text-gray-500 text-sm mb-6 leading-relaxed">Comprehensive treatment solutions for downstream facilities.</p>
         </div>
         <span class="text-[#0D85F4] text-xs font-bold uppercase tracking-widest flex items-center group-hover:translate-x-2 transition-transform">
           Download PDF <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </span>
       </a>
-
       <a href="#" class="group border border-gray-100 rounded-2xl p-8 bg-slate-50 hover:bg-white hover:shadow-2xl hover:border-[#0D85F4] transition-all duration-300 flex flex-col justify-between">
         <div>
           <div class="mb-6 inline-block p-3 bg-white rounded-xl shadow-sm group-hover:bg-[#0D85F4] transition-colors">
             <svg class="w-6 h-6 text-[#0D85F4] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
           </div>
           <h3 class="font-bold text-gray-900 text-lg mb-3 leading-tight">Membrane Technologies</h3>
-          <p class="text-gray-500 text-sm mb-6 leading-relaxed">
-            UF, RO and high salinity membrane systems.
-          </p>
+          <p class="text-gray-500 text-sm mb-6 leading-relaxed">UF, RO and high salinity membrane systems.</p>
         </div>
         <span class="text-[#0D85F4] text-xs font-bold uppercase tracking-widest flex items-center group-hover:translate-x-2 transition-transform">
           Download PDF <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </span>
       </a>
-
       <a href="#" class="group border border-gray-100 rounded-2xl p-8 bg-slate-50 hover:bg-white hover:shadow-2xl hover:border-[#0D85F4] transition-all duration-300 flex flex-col justify-between">
         <div>
           <div class="mb-6 inline-block p-3 bg-white rounded-xl shadow-sm group-hover:bg-[#0D85F4] transition-colors">
             <svg class="w-6 h-6 text-[#0D85F4] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
           </div>
           <h3 class="font-bold text-gray-900 text-lg mb-3 leading-tight">Zero Liquid Discharge</h3>
-          <p class="text-gray-500 text-sm mb-6 leading-relaxed">
-            Evaporation and crystallization for brine management.
-          </p>
+          <p class="text-gray-500 text-sm mb-6 leading-relaxed">Evaporation and crystallization for brine management.</p>
         </div>
         <span class="text-[#0D85F4] text-xs font-bold uppercase tracking-widest flex items-center group-hover:translate-x-2 transition-transform">
           Download PDF <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </span>
       </a>
-
       <a href="#" class="group border border-gray-100 rounded-2xl p-8 bg-slate-50 hover:bg-white hover:shadow-2xl hover:border-[#0D85F4] transition-all duration-300 flex flex-col justify-between">
         <div>
           <div class="mb-6 inline-block p-3 bg-white rounded-xl shadow-sm group-hover:bg-[#0D85F4] transition-colors">
             <svg class="w-6 h-6 text-[#0D85F4] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
           </div>
           <h3 class="font-bold text-gray-900 text-lg mb-3 leading-tight">Complete O&G Solutions</h3>
-          <p class="text-gray-500 text-sm mb-6 leading-relaxed">
-            End-to-end integrated water treatment systems.
-          </p>
+          <p class="text-gray-500 text-sm mb-6 leading-relaxed">End-to-end integrated water treatment systems.</p>
         </div>
         <span class="text-[#0D85F4] text-xs font-bold uppercase tracking-widest flex items-center group-hover:translate-x-2 transition-transform">
           Download PDF <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </span>
       </a>
-
     </div>
   </div>
 </section>
 
 <section class="py-24 bg-slate-50 relative overflow-hidden">
   <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(#0D85F4 1px, transparent 1px); background-size: 20px 20px;"></div>
-
   <div class="max-w-7xl mx-auto px-6 relative z-10">
     <div class="text-center mb-20">
       <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900">
@@ -677,9 +667,7 @@
       </h2>
       <div class="h-1 w-16 bg-[#0D85F4] mx-auto mt-6 rounded-full"></div>
     </div>
-
     <div class="grid md:grid-cols-3 gap-16">
-
       <div class="relative group">
         <div class="absolute -inset-4 bg-white/50 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
         <div class="relative">
@@ -687,13 +675,10 @@
             <span class="w-8 h-px bg-[#0D85F4] mr-4"></span> Oil & Water Separation
           </h3>
           <p class="text-gray-600 leading-relaxed text-lg">
-            API separators, hydrocyclones, dissolved gas flotation (DGF),
-            and induced gas flotation (IGF) systems designed for
-            efficient removal of free and emulsified oil.
+            API separators, hydrocyclones, dissolved gas flotation (DGF), and induced gas flotation (IGF) systems designed for efficient removal of free and emulsified oil.
           </p>
         </div>
       </div>
-
       <div class="relative group">
         <div class="absolute -inset-4 bg-white/50 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
         <div class="relative">
@@ -701,12 +686,10 @@
             <span class="w-8 h-px bg-[#0D85F4] mr-4"></span> Advanced Filtration
           </h3>
           <p class="text-gray-600 leading-relaxed text-lg">
-            Walnut shell filters, multimedia filtration, cartridge filters,
-            and polishing systems for achieving discharge or reuse quality.
+            Walnut shell filters, multimedia filtration, cartridge filters, and polishing systems for achieving discharge or reuse quality.
           </p>
         </div>
       </div>
-
       <div class="relative group">
         <div class="absolute -inset-4 bg-white/50 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
         <div class="relative">
@@ -714,56 +697,44 @@
             <span class="w-8 h-px bg-[#0D85F4] mr-4"></span> Desalination & Reuse
           </h3>
           <p class="text-gray-600 leading-relaxed text-lg">
-            Reverse osmosis, nanofiltration, thermal evaporation,
-            and crystallizers for high TDS and ZLD applications.
+            Reverse osmosis, nanofiltration, thermal evaporation, and crystallizers for high TDS and ZLD applications.
           </p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<section id="contact" class="relative py-24 bg-white border-t border-gray-100 overflow-hidden font-sans">
-  
+<section id="contact" class="relative py-24 bg-white border-t border-gray-100 overflow-hidden">
   <div class="absolute top-0 right-0 w-1/3 h-full bg-[#0D85F4]/5 -skew-x-12 transform origin-top pointer-events-none"></div>
-  <div class="absolute bottom-0 left-0 w-64 h-64 bg-slate-50 rounded-full -ml-32 -mb-32 blur-3xl pointer-events-none"></div>
-  
   <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
     <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-8 tracking-tight">
       Speak With Our <span class="text-[#0D85F4]">Oil & Gas Experts</span>
     </h2>
-    
     <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
       Customized systems engineered for compliance, efficiency, and long-term sustainability.
     </p>
-    
     <div class="flex flex-col sm:flex-row gap-5 justify-center">
       <a href="#" class="px-10 py-4 bg-[#0D85F4] text-white rounded-full font-bold text-lg hover:bg-[#0b76d9] transition-all shadow-lg shadow-[#0D85F4]/20 hover:scale-105 transform active:scale-95">
         Request a Consultation
       </a>
-      
       <a href="#" class="px-10 py-4 bg-white text-gray-900 border-2 border-gray-900 rounded-full font-bold text-lg hover:bg-gray-900 hover:text-white transition-all active:scale-95">
         Contact Sales
       </a>
     </div>
-
     <div class="mt-16 flex items-center justify-center space-x-8 opacity-50 grayscale">
       <div class="h-1 w-12 bg-gray-300 rounded-full"></div>
       <span class="text-xs uppercase tracking-[0.2em] font-bold text-gray-500">Engineering Excellence Since 19XX</span>
       <div class="h-1 w-12 bg-gray-300 rounded-full"></div>
     </div>
   </div>
-</div>
 </section>
-<footer class="bg-[#f3f4f6] text-gray-700 pt-16 pb-12 font-sans w-full">
 
-  <div class="w-full px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-
+<footer class="bg-[#f3f4f6] text-gray-700 pt-16 pb-12 w-full">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
     <div class="flex flex-col items-start">
       <img src="./images/logo.svg" alt="SCT Logo" class="h-14 w-auto mb-6">
     </div>
-
     <div class="lg:pl-8">
       <h3 class="font-bold text-black mb-6 text-lg tracking-tight">Company</h3>
       <ul class="space-y-4 text-[15px]">
@@ -774,7 +745,6 @@
         <li><a href="#" class="hover:text-[#0D85F4] transition-colors">Careers</a></li>
       </ul>
     </div>
-
     <div class="lg:pl-8">
       <h3 class="font-bold text-black mb-6 text-lg tracking-tight">More</h3>
       <ul class="space-y-4 text-[15px]">
@@ -784,22 +754,13 @@
         <li><a href="#" class="hover:text-[#0D85F4] transition-colors">Solutions</a></li>
       </ul>
     </div>
-
     <div class="space-y-6 lg:pl-4">
       <h3 class="font-bold text-black mb-6 text-lg tracking-tight">Contact</h3>
-      
       <div class="space-y-4 text-[14px] leading-relaxed">
-        <p>
-          <span class="font-bold text-gray-800">Address :</span> Sparkle Clean Tech Pvt. Ltd.(India), 89, Gautam Complex, Sector-11, CBD Belapur, Navi Mumbai - 400 614, India
-        </p>
-        <p>
-          <span class="font-bold text-gray-800">Phone :</span> +91 22 4061 9000
-        </p>
-        <p class="font-bold text-gray-900 underline decoration-[#0D85F4] decoration-2 underline-offset-4">
-          info@sctwater.com
-        </p>
+        <p><span class="font-bold text-gray-800">Address :</span> Sparkle Clean Tech Pvt. Ltd.(India), 89, Gautam Complex, Sector-11, CBD Belapur, Navi Mumbai - 400 614, India</p>
+        <p><span class="font-bold text-gray-800">Phone :</span> +91 22 4061 9000</p>
+        <p class="font-bold text-gray-900 underline decoration-[#0D85F4] decoration-2 underline-offset-4">info@sctwater.com</p>
       </div>
-
       <div class="flex space-x-4 pt-4">
         <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-[#0D85F4] text-[#0D85F4] hover:bg-[#0D85F4] hover:text-white transition-all duration-300" aria-label="LinkedIn">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
@@ -812,24 +773,64 @@
         </a>
       </div>
     </div>
-
   </div>
-
- <div class="w-full px-6 md:px-12 lg:px-20 mt-16 pt-8 border-t border-gray-200 flex flex-col items-center justify-center text-center text-xs text-gray-400">
-  <p class="mb-4 md:mb-2">© 2026 Sparkle Clean Tech. All rights reserved.</p>
-</div>
-
+  <div class="mt-16 pt-8 border-t border-gray-200 text-center text-xs text-gray-400">
+    <p>© 2026 Sparkle Clean Tech. All rights reserved.</p>
+  </div>
 </footer>
+
 <script>
   // Hide loader after page loads
   window.addEventListener('load', function() {
     setTimeout(function() {
       const loader = document.getElementById('loader');
-      loader.style.opacity = '0';
-      setTimeout(function() {
-        loader.style.display = 'none';
-      }, 700);
-    }, 1500); // 1.5 seconds loading time
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(function() {
+          loader.style.display = 'none';
+        }, 700);
+      }
+    }, 1500); 
+  });
+
+  // Mobile Menu Logic
+const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuBackdrop = document.getElementById('menu-backdrop');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  function toggleMenu() {
+    // We use explicit classes to avoid the "blank/stuck" issue
+    const isOpening = mobileMenu.classList.contains('translate-x-full');
+
+    if (isOpening) {
+      mobileMenu.classList.remove('translate-x-full');
+      mobileMenu.classList.add('translate-x-0');
+      menuBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+      menuBackdrop.classList.add('opacity-100');
+      menuIcon.classList.add('hidden');
+      closeIcon.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    } else {
+      mobileMenu.classList.add('translate-x-full');
+      mobileMenu.classList.remove('translate-x-0');
+      menuBackdrop.classList.add('opacity-0', 'pointer-events-none');
+      menuBackdrop.classList.remove('opacity-100');
+      menuIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+  }
+
+  menuBtn.addEventListener('click', toggleMenu);
+  menuBackdrop.addEventListener('click', toggleMenu);
+  
+  // Closes menu when clicking any section link
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      if (mobileMenu.classList.contains('translate-x-0')) toggleMenu();
+    });
   });
 </script>
 
